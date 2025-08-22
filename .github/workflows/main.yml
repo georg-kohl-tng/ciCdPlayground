@@ -26,7 +26,21 @@ jobs:
       run: yarn
     - name: Unit tests
       run: yarn test
+    - name: Publish Unit Test Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: unit-test-reports
+        path: reports/junit/jest.xml
+
     - name: Build
       run: yarn build
+
     - name: Integration tests
       run: yarn test:e2e
+    - name: Publish e2e Test Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: e2e-test-reports
+        path: cypress/reports/junit/*.xml
