@@ -31,7 +31,7 @@ jobs:
       if: always()
       with:
         name: unit-test-reports
-        path: reports/junit/jest.xml
+        path: reports/jest-junit.xml
 
     - name: Build
       run: yarn build
@@ -43,4 +43,4 @@ jobs:
       if: always()
       with:
         name: e2e-test-reports
-        path: cypress/reports/junit/*.xml
+        path: reports/cypress-junit.xml
