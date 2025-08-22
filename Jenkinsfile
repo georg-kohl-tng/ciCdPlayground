@@ -21,19 +21,23 @@ pipeline {
             steps {
                 sh 'yarn test'
             }
+            post {
+                always{
+                    junit 'reports/jest-junit.xml'
+                }
+            }
         }
 
         stage('integration test') {
             steps {
                 sh 'yarn test:e2e'
             }
-        }
-
-        stage('upload test results') {
-            steps {
-                junit '**/reports/**/*.xml'
+            post {
+                always {
+                    junit 'reports/cypress-junit.xml'
+                }
             }
-        }
+        }      
 
         stage('deploy') {
             steps {
